@@ -1,12 +1,14 @@
-// app/login/signup.tsx
+// app/profile.tsx
 
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { useRouter, Link } from 'expo-router'
-import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons'
+import { SafeAreaView, Image, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { useRouter } from 'expo-router'
+import { useNavigation, DrawerActions } from '@react-navigation/native'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function SignUp() {
       const router = useRouter()
+      const navigation = useNavigation()
       const [email, setEmail] = useState('')
       const [username, setUsername] = useState('')
       const [zipcode, setZipCode] = useState('')
@@ -16,12 +18,23 @@ export default function SignUp() {
       const [dob, setDOB] = useState('')
 
     const onSubmit = () => {
-      router.replace('/home')
+      router.replace('/forum')
     }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.pageTitle}>Profile</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+          <Ionicons name="menu" size={28} color="#fff" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Profile</Text>
+        <View style={{width:28}} />
+      </View>
+
+      <Image
+        source={require('../assets/images/profile.png')}
+        style={styles.profileImage}
+      />
 
       <View style={styles.field}>
         <Text>Username</Text>
@@ -43,13 +56,23 @@ export default function SignUp() {
         />
       </View>
 
-      <View style={styles.field}>
-        <Text>Zip Code</Text>
-        <TextInput
-          style={styles.input}
-          value={zipcode}
-          onChangeText={setZipCode}
-        />
+      <View style={[styles.field, styles.row]}>
+        <View style={styles.half}>
+          <Text style={styles.label}>Zip Code</Text>
+          <TextInput
+            style={styles.input}
+            value={zipcode}
+            onChangeText={setZipCode}
+          />
+        </View>
+        <View style={styles.half}>
+          <Text style={styles.label}>Location Radius</Text>
+          <TextInput
+            style={styles.input}
+            value={locationR}
+            onChangeText={setRadius}
+          />
+        </View>
       </View>
 
       <View style={styles.field}>
@@ -83,36 +106,58 @@ export default function SignUp() {
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
 
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 35,
-    justifyContent: 'center',
     backgroundColor: '#fff',
   },
-  pageTitle: {
-    fontSize: 25,
-    textAlign: 'center',
-    marginTop: -50,
-    marginBottom: 140,
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#000',
+    marginTop: 40,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  headerTitle: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    alignSelf: 'center',
+    marginVertical: 20,
   },
   field: {
     marginBottom: 16,
+    paddingHorizontal: 30,
   },
   input: {
     backgroundColor: '#eee',
     padding: 12,
     marginTop: 4,
   },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    half: {
+      width: '48%',
+    },
   button: {
     backgroundColor: '#2ecc71',
     paddingVertical: 16,
     alignItems: 'center',
     marginBottom: 12,
+    marginHorizontal: 120,
   },
   buttonText: {
     color: '#fff',
