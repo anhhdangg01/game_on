@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 
 export default function Home() {
@@ -21,18 +21,149 @@ export default function Home() {
         <Text style={styles.headerTitle}>Forum</Text>
         <View style={{width:28}} />
       </View>
-
-      <View style={styles.field}>
-        <View style={styles.searchSection}>
-          <Ionicons style={styles.searchIcon} name="search" size={28} color="#787878" />
-        <Ionicons style={styles.filterIcon} name="filter" size={28} color="#787878" />
-          <TextInput
-            style={styles.input}
-            onChangeText={setInput}
-            placeholder="Search"
-          />
+        <View style={styles.field}>
+          <View style={styles.searchSection}>
+            <Ionicons style={styles.searchIcon} name="search" size={28} color="#787878" />
+          <Ionicons style={styles.filterIcon} name="filter" size={28} color="#787878" />
+            <TextInput
+              style={styles.input}
+              onChangeText={setInput}
+              placeholder="Search"
+            />
+          </View>
         </View>
-      </View>
+        
+      <ScrollView>
+        <View style={styles.field}>
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Basketball @3PM Wednesday, need 4 more!</Text>
+              <Text style={styles.info}>HoopDreams227 @ 3:00PM Today | needs 4 more</Text>
+              <Text style={styles.location}>Basketball 
+                <Ionicons name="location" size={15} color="787878"/>
+                Anteater Recreation Center</Text>
+            </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>Please teach me I'm new!</Text>
+                <Text style={styles.info}>FloofyBall123 @ 7:20PM June 9 | all welcome</Text>
+                <Text style={styles.location}>Tennis 
+                  <Ionicons name="location" size={15} color="787878"/>
+                  Anteater Recreation Center</Text>
+              </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>Singles player looking to duo for a change</Text>
+                <Text style={styles.info}>ArcticReptilian1 @ 4:23PM June 15 | needs 3 more</Text>
+                <Text style={styles.location}>Pickleball
+                  <Ionicons name="location" size={15} color="787878"/>
+                  University Community Park</Text>
+              </View>
+          </View>
+
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>MIDDLE EARTH BASKETBALL TOURNAMENT</Text>
+                <Text style={styles.info}>XxAngelofSoulsxX @ 6:30PM June 30 | all welcome</Text>
+                <Text style={styles.location}>Basketball
+                  <Ionicons name="location" size={15} color="787878"/>
+                  Middle Earth Basketball Court</Text>
+              </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>Intermediate player looking for singles to play with</Text>
+                <Text style={styles.info}>casualcapybara @ 7:55PM July 1 | needs 1 more</Text>
+                <Text style={styles.location}>Tennis
+                  <Ionicons name="location" size={15} color="787878"/>
+                  University Community Park</Text>
+              </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>Tennis Tourney</Text>
+                <Text style={styles.info}>shiningFire1 @ 5:00PM July 5 | all welcome</Text>
+                <Text style={styles.location}>Tennis
+                  <Ionicons name="location" size={15} color="787878"/>
+                  Anteater Recreation Center</Text>
+              </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>UCI Soccer Social Event</Text>
+                <Text style={styles.info}>boredpetrock40 @ 6:00PM July 10 | all welcome</Text>
+                <Text style={styles.location}>Soccer
+                  <Ionicons name="location" size={15} color="787878"/>
+                  Mesa Court Field</Text>
+              </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>Looking for players in cornerback</Text>
+                <Text style={styles.info}>Getdunkedon2 @ 5:30PM July 14 | needs 2 more</Text>
+                <Text style={styles.location}>Football
+                  <Ionicons name="location" size={15} color="787878"/>
+                  Mesa Court Field</Text>
+              </View>
+          </View>
+
+          <View style={styles.post}>
+            <Image 
+              source={require('../assets/images/profile.png')}
+              style={styles.profileImage}
+            />
+              <View style={styles.textArea}>
+                <Text style={styles.label}>I need Badminton playmates :c</Text>
+                <Text style={styles.info}>borbofthewind @ 9:00AM July 15 | all welcome</Text>
+                <Text style={styles.location}>Badminton
+                  <Ionicons name="location" size={15} color="787878"/>
+                  Anteater Recreation Center</Text>
+              </View>
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -61,6 +192,30 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingHorizontal: 30,
   },
+  profileImage: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginTop: 6,
+    position: 'absolute'
+  },
+  label: {
+    fontWeight: 'bold',
+    fontSize: 23
+  },
+  info: {
+    fontSize: 18
+  },
+  location: {
+    fontSize: 15
+  },
+  post: {
+    padding: 6,
+    paddingBottom: 15
+  },
+  textArea: {
+    marginLeft: 100
+  },
   searchSection: {
     flex: 1,
     flexDirection: 'row',
@@ -73,7 +228,7 @@ const styles = StyleSheet.create({
   },
   filterIcon: {
     position: 'absolute',
-    paddingTop: 10,
+    paddingTop: 8,
     paddingRight: 3,
     marginLeft: '93%'
   },
