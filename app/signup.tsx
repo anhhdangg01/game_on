@@ -13,9 +13,6 @@ export default function SignUp() {
       const [agreed, setAgreed] = useState(false)
 
     const onSubmit = () => {
-      if (password === confirm && agreed) {
-        router.replace('/home')
-      }
       router.replace('/profile')
     }
 

@@ -24,8 +24,9 @@ export default function SignUp() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-          <Ionicons name="menu" size={28} color="#fff" />
+        {/*<TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>*/}
+        <TouchableOpacity onPress={() => router.push('/signup')}>
+        <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile</Text>
         <View style={{width:28}} />
