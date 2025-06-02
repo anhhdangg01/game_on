@@ -1,4 +1,4 @@
-// app/profile.tsx
+// app/screens/profile.tsx
 
 import React, { useState } from 'react'
 import { SafeAreaView, Image, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
@@ -18,14 +18,14 @@ export default function SignUp() {
       const [dob, setDOB] = useState('')
 
     const onSubmit = () => {
-      router.replace('/forum')
+      router.replace('/screens/forum')
     }
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        {/*<TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>*/}
-        <TouchableOpacity onPress={() => router.push('/signup')}>
+        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+        {/*<TouchableOpacity onPress={() => router.push('/signup')}>*/}
         <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile</Text>
@@ -33,7 +33,7 @@ export default function SignUp() {
       </View>
 
       <Image
-        source={require('../assets/images/profile.png')}
+        source={require('../../assets/images/profile.png')}
         style={styles.profileImage}
       />
 

@@ -13,7 +13,7 @@ export default function SignUp() {
       const [agreed, setAgreed] = useState(false)
 
     const onSubmit = () => {
-      router.replace('/profile')
+      router.replace('/screens/profile')
     }
 
   return (
@@ -81,7 +81,7 @@ export default function SignUp() {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
-      <Link href="/login" style={styles.signinLink}>
+      <Link href="/screens/login" style={styles.signinLink}>
         or click to Sign In
       </Link>
 

@@ -1,4 +1,4 @@
-// app/login.tsx
+// app/screens/login.tsx
 
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
@@ -13,7 +13,7 @@ export default function Login() {
       const [agreed, setAgreed] = useState(false)
 
     const onSubmit = () => {
-      router.replace('/forum')
+      router.replace('/screens/forum')
     }
 
   return (
@@ -58,7 +58,7 @@ export default function Login() {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <Link href="/signup" style={styles.signinLink}>
+      <Link href="../signup" style={styles.signinLink}>
         or click to Register
       </Link>
 
