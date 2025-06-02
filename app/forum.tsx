@@ -19,7 +19,9 @@ export default function Home() {
           <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Forum</Text>
-        <View style={{width:28}} />
+       <TouchableOpacity onPress={() => router.push('/nothing')}>
+         <Ionicons name="add" size={28} color="#fff" />
+       </TouchableOpacity>
       </View>
 
       <View style={styles.field}>
