@@ -46,9 +46,9 @@ export default function FilterScreen({ route }) {
           <Ionicons name="filter" size={24} />
           <Text style={{ fontSize: 20, marginLeft: 8 }}>Filters</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.navigate('forum', {filters: { sport, location, skill },})}>
           <Ionicons name="close" size={28} color="#333" />
-        </TouchableOpacity>
+      </TouchableOpacity>
       </View>
       <Dropdown label="Sport" options={sports} value={sport} onChange={setSport} />
       <Dropdown label="Location" options={locations} value={location} onChange={setLocation} />
