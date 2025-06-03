@@ -1,4 +1,4 @@
-// app/screens/forum.tsx
+// app/screens/messages.tsx
 
 import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { Modal, TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-export default function Home() {
+export default function Messages() {
   const router = useRouter()
   const navigation = useNavigation()
   const [input, setInput] = useState('')
@@ -18,7 +18,7 @@ export default function Home() {
         {/*<TouchableOpacity onPress={() => router.push('/signup')}>*/}
           <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Forum</Text>
+        <Text style={styles.headerTitle}>Messages</Text>
        <TouchableOpacity onPress={() => router.push('/nothing')}>
          <Ionicons name="add" size={28} color="#fff" />
        </TouchableOpacity>
@@ -59,11 +59,8 @@ export default function Home() {
             />
 
             <View style={styles.textArea}>
-              <Text style={styles.label}>Basketball @3PM Wednesday, need 4 more!</Text>
-              <Text style={styles.info}>HoopDreams227 @ 3:00PM Today | needs 4 more</Text>
-              <Text style={styles.location}>Basketball 
-                <Ionicons name="location" size={15} color="#787878"/>
-                Anteater Recreation Center</Text>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
             </View>
           </View>
 
@@ -72,13 +69,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Please teach me I'm new!</Text>
-                <Text style={styles.info}>FloofyBall123 @ 7:20PM June 9 | all welcome</Text>
-                <Text style={styles.location}>Tennis 
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Anteater Recreation Center</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
           <View style={styles.post}>
@@ -86,13 +80,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Singles player looking to duo for a change</Text>
-                <Text style={styles.info}>ArcticReptilian1 @ 4:23PM June 15 | needs 3 more</Text>
-                <Text style={styles.location}>Pickleball
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  University Community Park</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
 
@@ -101,13 +92,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>MIDDLE EARTH BASKETBALL TOURNAMENT</Text>
-                <Text style={styles.info}>XxAngelofSoulsxX @ 6:30PM June 30 | all welcome</Text>
-                <Text style={styles.location}>Basketball
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Middle Earth Basketball Court</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
           <View style={styles.post}>
@@ -115,13 +103,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Intermediate player looking for singles to play with</Text>
-                <Text style={styles.info}>casualcapybara @ 7:55PM July 1 | needs 1 more</Text>
-                <Text style={styles.location}>Tennis
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  University Community Park</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
           <View style={styles.post}>
@@ -129,13 +114,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Tennis Tourney</Text>
-                <Text style={styles.info}>shiningFire1 @ 5:00PM July 5 | all welcome</Text>
-                <Text style={styles.location}>Tennis
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Anteater Recreation Center</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
           <View style={styles.post}>
@@ -143,13 +125,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>UCI Soccer Social Event</Text>
-                <Text style={styles.info}>boredpetrock40 @ 6:00PM July 10 | all welcome</Text>
-                <Text style={styles.location}>Soccer
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Mesa Court Field</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
           <View style={styles.post}>
@@ -157,13 +136,10 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Looking for players in cornerback</Text>
-                <Text style={styles.info}>Getdunkedon2 @ 5:30PM July 14 | needs 2 more</Text>
-                <Text style={styles.location}>Football
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Mesa Court Field</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
 
           <View style={styles.post}>
@@ -171,14 +147,12 @@ export default function Home() {
               source={require('../../assets/images/profile.png')}
               style={styles.profileImage}
             />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>I need Badminton playmates :c</Text>
-                <Text style={styles.info}>borbofthewind @ 9:00AM July 15 | all welcome</Text>
-                <Text style={styles.location}>Badminton
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Anteater Recreation Center</Text>
-              </View>
+            <View style={styles.textArea}>
+              <Text style={styles.label}>Tennislover123</Text>
+              <Text style={styles.info}>Sup, wanna hang out?</Text>
+            </View>
           </View>
+
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -228,7 +202,8 @@ const styles = StyleSheet.create({
   },
   post: {
     padding: 6,
-    paddingBottom: 15
+    paddingBottom: 15,
+    marginBottom: 10,
   },
   textArea: {
     marginLeft: 100

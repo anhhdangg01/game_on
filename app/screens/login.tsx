@@ -42,6 +42,32 @@ export default function Login() {
         />
       </View>
 
+      <View style={styles.checkboxContainer}>
+        <TouchableOpacity
+          style={styles.checkbox}
+          onPress={() => setAgreed(!agreed)}
+        >
+          {agreed
+            ? <AntDesign name="checksquare" size={24} />
+            : <AntDesign name="minussquareo" size={24} />
+          }
+          <Text style={styles.checkboxText}>Enable biometrics</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.checkboxContainer}>
+        <TouchableOpacity
+          style={styles.checkbox}
+          onPress={() => setAgreed(!agreed)}
+        >
+          {agreed
+            ? <AntDesign name="checksquare" size={24} />
+            : <AntDesign name="minussquareo" size={24} />
+          }
+          <Text style={styles.checkboxText}>Remember Login</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.social}>
         <TouchableOpacity>
           <FontAwesome name="google" size={32} />
@@ -84,7 +110,7 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 32,
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 64,
   },
   field: {
     marginBottom: 16,
@@ -93,6 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     padding: 12,
     marginTop: 4,
+    marginBottom: 15,
   },
   link: {
     color: '#0066cc',
@@ -102,6 +129,7 @@ const styles = StyleSheet.create({
   social: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 20,
     marginBottom: 24,
   },
   button: {
@@ -123,4 +151,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#999',
   },
+  checkboxContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  checkbox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  checkboxText: {
+    fontSize: 15,
+  }
 })

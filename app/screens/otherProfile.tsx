@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router'
 import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 
-export default function SignUp() {
+export default function otherProfile() {
       const router = useRouter()
       const navigation = useNavigation()
       const [email, setEmail] = useState('')
@@ -16,10 +16,9 @@ export default function SignUp() {
       const [favSport, setFavSport] = useState('')
       const [skillLevel, setLevel] = useState('')
       const [dob, setDOB] = useState('')
-      const [bio, setBio] = useState('')
 
     const onSubmit = () => {
-      router.replace('../otherProfile')
+      router.replace('/screens/forum')
     }
 
   return (
@@ -29,14 +28,20 @@ export default function SignUp() {
         {/*<TouchableOpacity onPress={() => router.push('/signup')}>*/}
         <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Profile</Text>
         <View style={{width:28}} />
       </View>
 
-      <Image
-        source={require('../../assets/images/profile.png')}
-        style={styles.profileImage}
-      />
+      <View style={[styles.field, styles.row]}>
+        <View style={styles.half}>
+          <Image
+            source={require('../../assets/images/profile.png')}
+            style={styles.profileImage}
+          />
+        </View>
+        <View style={styles.scondHalf}>
+          <Text style={styles.namelabel}>tennislover134</Text>
+        </View>
+      </View>
 
       <View style={styles.field}>
         <Text>Username</Text>
@@ -104,15 +109,6 @@ export default function SignUp() {
         />
       </View>
 
-     <View style={styles.field}>
-        <Text>Bio</Text>
-        <TextInput
-          style={styles.bioInput}
-          value={bio}
-          onChangeText={setBio}
-        />
-      </View>
-
       <TouchableOpacity style={styles.button} onPress={onSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
@@ -144,7 +140,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    alignSelf: 'center',
+    alignItems: 'flex-start',
     marginVertical: 20,
   },
   field: {
@@ -156,17 +152,18 @@ const styles = StyleSheet.create({
     padding: 12,
     marginTop: 4,
   },
-  bioInput: {
-    backgroundColor: '#eee',
-    padding: 12,
-    marginTop: 4,
-  },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   half: {
-      width: '48%',
+    width: '48%',
+  },
+  secondHalf: {
+    width: '10%',
+  },
+  nameLabel: {
+    fontSize: 16,
   },
   button: {
     backgroundColor: '#2ecc71',

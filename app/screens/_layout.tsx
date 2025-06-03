@@ -1,6 +1,7 @@
 // app/screens/_layout.tsx
 
 import { Drawer } from 'expo-router/drawer'
+import { otherProfile } from './otherProfile'
 import React from 'react'
 
 export default function RootLayout() {
@@ -13,10 +14,28 @@ export default function RootLayout() {
           headerShown: false
         }}
       />
-      {/*}<Drawer.Screen
-        name="messages"
+      <Drawer.Screen
+          name="messages"
+          options={{
+            title: 'Messages',
+            headerShown: false
+         }}
+      />
+      <Drawer.Screen
+          name="otherProfile"
+          options={{
+            title: 'Other Profile (in progress)',
+            headerShown: false
+         }}
+      />
+
+      {/*}
+      <Drawer.Screen
+        name="otherProfile"
+        component={otherProfile}
         options={{
-          title: 'Messages',
+          drawerItemStyle: { display: 'none' },
+          headerShown: false
         }}
       />
       <Drawer.Screen
