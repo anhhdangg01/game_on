@@ -3,13 +3,40 @@
 import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
-import React, { useState } from 'react'
-import { Modal, TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState ,useEffect } from 'react'
+import { TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import AddPostModal from './AddPostModal'
+import { forumData, ForumPost } from '../../script/forumData'
 
 export default function Home() {
   const router = useRouter()
   const navigation = useNavigation()
   const [input, setInput] = useState('')
+  const [posts, setPosts] = useState<ForumPost[]>([])
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  useEffect(() => {
+    setPosts([...forumData])
+  }, [forumData])
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+    setPosts([...forumData])
+  }
+
+  const filteredPosts = posts.filter((post) => {
+    const query = input.trim().toLowerCase()
+
+    if (query === '') return true
+
+    return (
+      post.message.toLowerCase().includes(query) ||
+      post.author.toLowerCase().includes(query) ||
+      post.sport.toLowerCase().includes(query) ||
+      post.location.toLowerCase().includes(query) ||
+      post.needed.toLowerCase().includes(query)
+    )
+  })
 
   return (
     <SafeAreaView style={styles.container}>
@@ -19,9 +46,9 @@ export default function Home() {
           <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Forum</Text>
-       <TouchableOpacity onPress={() => router.push('/nothing')}>
-         <Ionicons name="add" size={28} color="#fff" />
-       </TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+          <Ionicons name="add" size={28} color="#fff" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.field}>
@@ -36,6 +63,7 @@ export default function Home() {
             <TextInput
               style={styles.input}
               onChangeText={setInput}
+              value={input}
               placeholder="Search"
               placeholderTextColor="#787878"
             />
@@ -52,135 +80,32 @@ export default function Home() {
         
       <ScrollView>
         <View style={styles.field}>
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Basketball @3PM Wednesday, need 4 more!</Text>
-              <Text style={styles.info}>HoopDreams227 @ 3:00PM Today | needs 4 more</Text>
-              <Text style={styles.location}>Basketball 
-                <Ionicons name="location" size={15} color="#787878"/>
-                Anteater Recreation Center</Text>
+          {filteredPosts.map((post) => (
+            <View style={styles.post} key={post.id}>
+              <TouchableOpacity onPress={() => router.push('/screens/otherProfile')}>
+                <Image
+                  source={require('../../assets/images/profile.png')}
+                  style={styles.profileImage}
+                />
+              </TouchableOpacity>
+              <View style={styles.textArea}>
+                <Text style={styles.label}>{post.message}</Text>
+                <Text style={styles.info}>
+                  {post.author} @ {post.time} | {post.needed}
+                </Text>
+                <Text style={styles.location}>
+                  {post.sport}{' '}
+                  <Ionicons name="location" size={15} color="#787878" />
+                  {post.location}
+                </Text>
+              </View>
             </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Please teach me I'm new!</Text>
-                <Text style={styles.info}>FloofyBall123 @ 7:20PM June 9 | all welcome</Text>
-                <Text style={styles.location}>Tennis 
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Anteater Recreation Center</Text>
-              </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Singles player looking to duo for a change</Text>
-                <Text style={styles.info}>ArcticReptilian1 @ 4:23PM June 15 | needs 3 more</Text>
-                <Text style={styles.location}>Pickleball
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  University Community Park</Text>
-              </View>
-          </View>
-
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>MIDDLE EARTH BASKETBALL TOURNAMENT</Text>
-                <Text style={styles.info}>XxAngelofSoulsxX @ 6:30PM June 30 | all welcome</Text>
-                <Text style={styles.location}>Basketball
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Middle Earth Basketball Court</Text>
-              </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Intermediate player looking for singles to play with</Text>
-                <Text style={styles.info}>casualcapybara @ 7:55PM July 1 | needs 1 more</Text>
-                <Text style={styles.location}>Tennis
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  University Community Park</Text>
-              </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Tennis Tourney</Text>
-                <Text style={styles.info}>shiningFire1 @ 5:00PM July 5 | all welcome</Text>
-                <Text style={styles.location}>Tennis
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Anteater Recreation Center</Text>
-              </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>UCI Soccer Social Event</Text>
-                <Text style={styles.info}>boredpetrock40 @ 6:00PM July 10 | all welcome</Text>
-                <Text style={styles.location}>Soccer
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Mesa Court Field</Text>
-              </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>Looking for players in cornerback</Text>
-                <Text style={styles.info}>Getdunkedon2 @ 5:30PM July 14 | needs 2 more</Text>
-                <Text style={styles.location}>Football
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Mesa Court Field</Text>
-              </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-              <View style={styles.textArea}>
-                <Text style={styles.label}>I need Badminton playmates :c</Text>
-                <Text style={styles.info}>borbofthewind @ 9:00AM July 15 | all welcome</Text>
-                <Text style={styles.location}>Badminton
-                  <Ionicons name="location" size={15} color="#787878"/>
-                  Anteater Recreation Center</Text>
-              </View>
-          </View>
+          ))}
         </View>
       </ScrollView>
+
+      <AddPostModal visible={isModalVisible} onClose={closeModal} />
+
     </SafeAreaView>
   )
 }

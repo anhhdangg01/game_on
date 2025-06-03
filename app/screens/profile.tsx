@@ -19,14 +19,13 @@ export default function SignUp() {
       const [bio, setBio] = useState('')
 
     const onSubmit = () => {
-      router.replace('../otherProfile')
+      router.replace('/screens/forum')
     }
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        {/*<TouchableOpacity onPress={() => router.push('/signup')}>*/}
         <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile</Text>
