@@ -23,9 +23,24 @@ export default function RootLayout() {
       <Drawer.Screen
           name="otherProfile"
           options={{
-            title: 'Other Profile (in progress)',
+            title: 'Other Profile (hidden)',
             headerShown: false,
             drawerItemStyle: { display: 'none' }
+         }}
+      />
+      <Drawer.Screen
+          name="AddPostModal"
+          options={{
+            title: 'AddPostModal (hidden)',
+            headerShown: false,
+            drawerItemStyle: { display: 'none' }
+         }}
+      />
+      <Drawer.Screen
+          name="yourPosts"
+          options={{
+            title: 'Your Posts',
+            headerShown: false,
          }}
       />
       {/*}
