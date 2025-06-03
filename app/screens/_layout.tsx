@@ -1,7 +1,6 @@
 // app/screens/_layout.tsx
 
 import { Drawer } from 'expo-router/drawer'
-import { otherProfile } from './otherProfile'
 import React from 'react'
 
 export default function RootLayout() {
@@ -75,6 +74,14 @@ export default function RootLayout() {
         options={{
           title: 'Logout',
           headerShown: false
+        }}
+      />
+      <Drawer.Screen
+        name="direct_message"
+        options={{
+          title: "Direct Message",
+          headerShown: false,
+          drawerItemStyle: {display: 'none'}
         }}
       />
     </Drawer>
