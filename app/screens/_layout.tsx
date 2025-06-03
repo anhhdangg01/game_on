@@ -91,6 +91,14 @@ export default function RootLayout() {
           drawerItemStyle: {display: 'none'}
         }}
       />
+      <Drawer.Screen
+        name="FilterScreen"
+        options={{
+          title: 'Filters (hidden)',
+          headerShown: false,
+          drawerItemStyle: { display: 'none' }
+        }}
+      />
     </Drawer>
   )
 }
