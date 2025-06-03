@@ -1,21 +1,13 @@
 // app/screens/profile.tsx
 
 import React, { useState } from 'react'
-import { SafeAreaView, Image, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { SafeAreaView, Image, View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function otherProfile() {
-      const router = useRouter()
       const navigation = useNavigation()
-      const [email, setEmail] = useState('')
-      const [username, setUsername] = useState('')
-      const [zipcode, setZipCode] = useState('')
-      const [locationR, setRadius] = useState('')
-      const [favSport, setFavSport] = useState('')
-      const [skillLevel, setLevel] = useState('')
-      const [dob, setDOB] = useState('')
 
     const onSubmit = () => {
       router.replace('/screens/forum')
@@ -25,94 +17,57 @@ export default function otherProfile() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        {/*<TouchableOpacity onPress={() => router.push('/signup')}>*/}
-        <Ionicons name="menu" size={28} color="#fff" />
+          <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
-        <View style={{width:28}} />
+        <View style={{ width: 28 }} />
       </View>
 
-      <View style={[styles.field, styles.row]}>
-        <View style={styles.half}>
-          <Image
-            source={require('../../assets/images/profile.png')}
-            style={styles.profileImage}
-          />
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+        <Image source={require('../../assets/images/profile.png')} style={styles.profileImage} />
+        <Text style={styles.username}>tennislover134</Text>
+
+        <View style={styles.stars}>
+          <Ionicons name="star" size={20} color="#FFD700" />
+          <Ionicons name="star" size={20} color="#FFD700" />
+          <Ionicons name="star" size={20} color="#FFD700" />
+          <Ionicons name="star" size={20} color="#FFD700" />
+          <Ionicons name="star-outline" size={20} color="#FFD700" />
         </View>
-        <View style={styles.scondHalf}>
-          <Text style={styles.namelabel}>tennislover134</Text>
+
+        <View style={styles.followInfo}>
+          <Text style={styles.followLabel}>123 Followers</Text>
+          <Text style={styles.followLabel}> · </Text>
+          <Text style={styles.followLabel}>97 Following</Text>
         </View>
-      </View>
 
-      <View style={styles.field}>
-        <Text>Username</Text>
-        <TextInput
-          style={styles.input}
-          value={username}
-          onChangeText={setUsername}
-        />
-      </View>
+        <TouchableOpacity style={styles.actionButton}>
+          <Text style={styles.actionText}>Follow</Text>
+        </TouchableOpacity>
 
-      <View style={styles.field}>
-        <Text>Email:</Text>
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-
-      <View style={[styles.field, styles.row]}>
-        <View style={styles.half}>
-          <Text style={styles.label}>Zip Code</Text>
-          <TextInput
-            style={styles.input}
-            value={zipcode}
-            onChangeText={setZipCode}
-          />
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>Favorite Sport(s)</Text>
+          <Text style={styles.sectionValue}>Tennis, Badminton, Soccer</Text>
         </View>
-        <View style={styles.half}>
-          <Text style={styles.label}>Location Radius</Text>
-          <TextInput
-            style={styles.input}
-            value={locationR}
-            onChangeText={setRadius}
-          />
+
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>Skill Level</Text>
+          <Text style={styles.sectionValue}>Tennis (3 yrs), Badminton (2 yrs), Soccer (5 yrs)</Text>
         </View>
-      </View>
 
-      <View style={styles.field}>
-        <Text>Favorite Sport</Text>
-        <TextInput
-          style={styles.input}
-          value={favSport}
-          onChangeText={setFavSport}
-        />
-      </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>Bio</Text>
+          <Text style={styles.sectionValue}>Just a student athlete who loves hitting the court. Always down for a match and meeting new players!</Text>
+        </View>
 
-      <View style={styles.field}>
-        <Text>Skill Level</Text>
-        <TextInput
-          style={styles.input}
-          value={skillLevel}
-          onChangeText={setLevel}
-        />
-      </View>
-
-     <View style={styles.field}>
-        <Text>Date of Birth</Text>
-        <TextInput
-          style={styles.input}
-          value={dob}
-          onChangeText={setDOB}
-        />
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={onSubmit}>
-        <Text style={styles.buttonText}>Save</Text>
-      </TouchableOpacity>
-
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>Recent Friends</Text>
+          <View style={styles.friendRow}>
+            <Image source={require('../../assets/images/profile.png')} style={styles.friendImage} />
+            <Image source={require('../../assets/images/profile.png')} style={styles.friendImage} />
+            <Image source={require('../../assets/images/profile.png')} style={styles.friendImage} />
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -124,56 +79,69 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#000',
     marginTop: 40,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  headerTitle: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
   profileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    alignItems: 'flex-start',
-    marginVertical: 20,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginTop: 20,
   },
-  field: {
-    marginBottom: 16,
-    paddingHorizontal: 30,
+  username: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 8,
   },
-  input: {
-    backgroundColor: '#eee',
-    padding: 12,
-    marginTop: 4,
-  },
-  row: {
+  stars: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    marginTop: 6,
   },
-  half: {
-    width: '48%',
+  followInfo: {
+    flexDirection: 'row',
+    marginTop: 6,
   },
-  secondHalf: {
-    width: '10%',
+  followLabel: {
+    fontSize: 14,
+    color: '#555',
   },
-  nameLabel: {
+  actionButton: {
+    backgroundColor: '#007BFF',
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    marginTop: 12,
+  },
+  actionText: {
+    color: '#fff',
     fontSize: 16,
   },
-  button: {
-    backgroundColor: '#2ecc71',
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginBottom: 12,
-    marginHorizontal: 120,
+  section: {
+    width: '85%',
+    marginTop: 20,
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
+  sectionLabel: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 6,
+  },
+  sectionValue: {
+    backgroundColor: '#eee',
+    padding: 10,
+    borderRadius: 5,
+    fontSize: 15,
+  },
+  friendRow: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  friendImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
   },
 })
