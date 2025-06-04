@@ -3,8 +3,8 @@
 import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
-import React, { useState , useEffect } from 'react'
-import { Modal, TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Message, messagesData } from '../../script/messageData'
 
 export default function Messages() {
@@ -12,6 +12,10 @@ export default function Messages() {
   const navigation = useNavigation()
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
+  const [showModal, setShowModal] = useState(false)
+  const [newMessageText, setNewMessageText] = useState('')
+  const [newRecipient, setNewRecipient] = useState('')
+
 
   useEffect(() => {
     setMessages([...messagesData])
@@ -35,7 +39,7 @@ export default function Messages() {
           <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Messages</Text>
-        <TouchableOpacity onPress={() => router.push('/nothing')}>
+        <TouchableOpacity onPress={() => setShowModal(true)}>
           <Ionicons name="add" size={28} color="#fff" />
         </TouchableOpacity>
       </View>
@@ -85,6 +89,47 @@ export default function Messages() {
           })}
         </View>
       </ScrollView>
+      <Modal visible={showModal} animationType="slide" transparent>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>New Message</Text>
+            <TextInput
+              placeholder="Recipient"
+              style={styles.input}
+              value={newRecipient}
+              onChangeText={setNewRecipient}
+            />
+            <TextInput
+              placeholder="Message"
+              style={[styles.input, { height: 80 }]}
+              value={newMessageText}
+              onChangeText={setNewMessageText}
+              multiline
+            />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <TouchableOpacity onPress={() => setShowModal(false)}>
+                <Text style={{ color: 'red' }}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (newRecipient && newMessageText) {
+                    const newMsg: Message = {
+                      id: Date.now().toString(),
+                      sender: newRecipient,
+                      preview: newMessageText,
+                    }
+                    setMessages((prev) => [newMsg, ...prev])
+                    setShowModal(false)
+                    setNewRecipient('')
+                    setNewMessageText('')
+                  }
+                }}>
+                <Text style={{ color: 'blue' }}>Send</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   )
 }
@@ -166,5 +211,27 @@ const styles = StyleSheet.create({
     padding: 8,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 })
