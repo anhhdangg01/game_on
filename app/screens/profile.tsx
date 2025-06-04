@@ -59,24 +59,14 @@ export default function SignUp() {
         />
       </View>
 
-      <View style={[styles.field, styles.row]}>
-        <View style={styles.half}>
-          <Text style={styles.label}>Zip Code</Text>
-          <TextInput
-            style={styles.input}
-            value={zipcode}
-            onChangeText={setZipCode}
-          />
-        </View>
-        <View style={styles.half}>
-          <Text style={styles.label}>Location Radius</Text>
-          <TextInput
-            style={styles.input}
-            value={locationR}
-            onChangeText={setRadius}
-          />
-        </View>
-      </View>
+    <View style={styles.field}>
+      <Text style={styles.label}>Zip Code</Text>
+      <TextInput
+        style={styles.input}
+        value={zipcode}
+        onChangeText={setZipCode}
+      />
+    </View>
 
       <View style={styles.field}>
         <Text>Favorite Sport</Text>
