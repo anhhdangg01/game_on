@@ -1,7 +1,7 @@
 // app/screens/profile.tsx
 
 import React, { useState } from 'react'
-import { SafeAreaView, Image, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, SafeAreaView, Image, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
@@ -9,14 +9,14 @@ import { Ionicons } from '@expo/vector-icons'
 export default function SignUp() {
       const router = useRouter()
       const navigation = useNavigation()
-      const [email, setEmail] = useState('')
-      const [username, setUsername] = useState('')
-      const [zipcode, setZipCode] = useState('')
-      const [locationR, setRadius] = useState('')
-      const [favSport, setFavSport] = useState('')
-      const [skillLevel, setLevel] = useState('')
-      const [dob, setDOB] = useState('')
-      const [bio, setBio] = useState('')
+      const [email, setEmail] = useState('tyler7128@outlook.com')
+      const [username, setUsername] = useState('tylker13')
+      const [zipcode, setZipCode] = useState('72881')
+      const [locationR, setRadius] = useState('10 miles')
+      const [favSport, setFavSport] = useState('Football, Tennis, Basketball')
+      const [skillLevel, setLevel] = useState('FB (10 yrs), Tennis (2 yrs), Basketball (1 yr)')
+      const [dob, setDOB] = useState('10/28/1989')
+      const [bio, setBio] = useState('Passionate about sports and always looking for new teammates to play with. Weekend warrior and weekday strategist.')
 
     const onSubmit = () => {
       router.replace('/screens/forum')
@@ -24,6 +24,7 @@ export default function SignUp() {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
         <Ionicons name="menu" size={28} color="#fff" />
@@ -32,6 +33,7 @@ export default function SignUp() {
         <View style={{width:28}} />
       </View>
 
+      <ScrollView>
       <Image
         source={require('../../assets/images/profile.png')}
         style={styles.profileImage}
@@ -109,13 +111,14 @@ export default function SignUp() {
           style={styles.bioInput}
           value={bio}
           onChangeText={setBio}
+          multiline
         />
       </View>
 
       <TouchableOpacity style={styles.button} onPress={onSubmit}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
-
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -159,6 +162,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     padding: 12,
     marginTop: 4,
+    height: 100,
+    textAlignVertical: 'top',
   },
   row: {
     flexDirection: 'row',
