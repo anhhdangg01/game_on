@@ -1,41 +1,56 @@
 // app/screens/forum.tsx
 
 import { Ionicons } from '@expo/vector-icons'
-import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { DrawerActions, useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
-import React, { useState ,useEffect } from 'react'
-import { TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import AddPostModal from './AddPostModal'
+import React, { useEffect, useState } from 'react'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { forumData, ForumPost } from '../../script/forumData'
+import AddPostModal from './AddPostModal'
 
-export default function Home() {
+export default function Home(props) {
+  const navigation = useNavigation();
+  const route = props.route;
   const router = useRouter()
-  const navigation = useNavigation()
   const [input, setInput] = useState('')
   const [posts, setPosts] = useState<ForumPost[]>([])
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [filters, setFilters] = useState(null)
 
   useEffect(() => {
     setPosts([...forumData])
   }, [forumData])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route?.params?.filters) {
+        setFilters(route.params.filters)
+      }
+    }, [route?.params?.filters])
+  )
 
   const closeModal = () => {
     setIsModalVisible(false)
     setPosts([...forumData])
   }
 
+  const clearFilters = () => setFilters(null)
+
   const filteredPosts = posts.filter((post) => {
     const query = input.trim().toLowerCase()
-
-    if (query === '') return true
-
-    return (
+    if (query && !(
       post.message.toLowerCase().includes(query) ||
       post.author.toLowerCase().includes(query) ||
       post.sport.toLowerCase().includes(query) ||
       post.location.toLowerCase().includes(query) ||
       post.needed.toLowerCase().includes(query)
-    )
+    )) return false
+    if (filters) {
+      if (filters.sport !== 'All' && post.sport !== filters.sport) return false
+      if (filters.location && post.location !== filters.location) return false
+      if (filters.skill && post.needed !== filters.skill) return false
+    }
+    return true
   })
 
   return (
@@ -52,6 +67,17 @@ export default function Home() {
       </View>
 
       <View style={styles.field}>
+        {filters && (
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+            <Text>Filters: </Text>
+            <Text>Sport: {filters.sport} </Text>
+            <Text>Location: {filters.location} </Text>
+            <Text>Skill: {filters.skill} </Text>
+            <TouchableOpacity onPress={clearFilters} style={{ marginLeft: 8 }}>
+              <Ionicons name="close-circle" size={20} color="red" />
+            </TouchableOpacity>
+          </View>
+        )}
         <View style={styles.searchSection}>
           <View style={styles.inputWrapper}>
             <Ionicons
@@ -68,7 +94,7 @@ export default function Home() {
               placeholderTextColor="#787878"
             />
           </View>
-          <TouchableOpacity style={styles.filterButton}>
+          <TouchableOpacity style={styles.filterButton} onPress={() => { console.log('Filter button pressed'); navigation.navigate('FilterScreen'); }}>
             <Ionicons
               name="filter"
               size={20}

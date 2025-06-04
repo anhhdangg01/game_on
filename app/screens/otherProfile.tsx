@@ -7,7 +7,8 @@ import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function otherProfile() {
-      const navigation = useNavigation()
+  const navigation = useNavigation()
+  const router = useRouter()
 
     const onSubmit = () => {
       router.replace('/screens/forum')
@@ -16,8 +17,8 @@ export default function otherProfile() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-          <Ionicons name="menu" size={28} color="#fff" />
+        <TouchableOpacity onPress={() => router.push('/screens/forum')}>
+          <Ionicons name="arrow-back" size={28} color="#fff"/>
         </TouchableOpacity>
         <View style={{ width: 28 }} />
       </View>
@@ -40,9 +41,17 @@ export default function otherProfile() {
           <Text style={styles.followLabel}>97 Following</Text>
         </View>
 
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionText}>Follow</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionText}>Follow</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionText}>Add Friend</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionText}>Message</Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Favorite Sport(s)</Text>
@@ -111,9 +120,8 @@ const styles = StyleSheet.create({
   actionButton: {
     backgroundColor: '#007BFF',
     paddingVertical: 8,
-    paddingHorizontal: 20,
+    paddingHorizontal: 14,
     borderRadius: 20,
-    marginTop: 12,
   },
   actionText: {
     color: '#fff',
@@ -143,5 +151,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     marginRight: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+    marginTop: 12,
   },
 })
