@@ -7,6 +7,10 @@ import React, { useEffect, useState } from 'react'
 import { Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Message, messagesData } from '../../script/messageData'
 
+const allContacts = Array.from(
+    new Set(messagesData.map((m) => m.sender))
+)
+
 export default function Messages() {
   const router = useRouter()
   const navigation = useNavigation()
@@ -15,7 +19,7 @@ export default function Messages() {
   const [showModal, setShowModal] = useState(false)
   const [newMessageText, setNewMessageText] = useState('')
   const [newRecipient, setNewRecipient] = useState('')
-
+  const [contactQuery, setContactQuery] = useState('')
 
   useEffect(() => {
     setMessages([...messagesData])
@@ -29,6 +33,12 @@ export default function Messages() {
       msg.sender.toLowerCase().includes(query) ||
       msg.preview.toLowerCase().includes(query)
     )
+  })
+
+  const filteredContacts = allContacts.filter((contact) => {
+    const query = contactQuery.trim().toLowerCase()
+    if (query === '') return true
+    return contact.toLowerCase().includes(query)
   })
 
   return (
@@ -92,39 +102,33 @@ export default function Messages() {
       <Modal visible={showModal} animationType="slide" transparent>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>New Message</Text>
             <TextInput
-              placeholder="Recipient"
-              style={styles.input}
-              value={newRecipient}
-              onChangeText={setNewRecipient}
-            />
-            <TextInput
-              placeholder="Message"
-              style={[styles.input, { height: 80 }]}
-              value={newMessageText}
-              onChangeText={setNewMessageText}
-              multiline
-            />
+              placeholder="Search contacts"
+              style={[styles.input, { marginBottom: 12 }]}
+              value={contactQuery}
+              onChangeText={setContactQuery}/>
+            <ScrollView style={{ maxHeight: 250, marginBottom: 16 }}>
+              {filteredContacts.map((contact) => (
+                <TouchableOpacity
+                  key={contact}
+                  style={styles.contactRow}
+                  onPress={() => {
+                    setNewRecipient(contact)
+                    setShowModal(false)
+                    setNewRecipient('')
+                    setContactQuery('')
+                    router.push({
+                      pathname: '/screens/direct_message',
+                      params: { user: contact },
+                    })
+                  }}>
+                  <Text style={styles.contactName}>{contact}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <TouchableOpacity onPress={() => setShowModal(false)}>
                 <Text style={{ color: 'red' }}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (newRecipient && newMessageText) {
-                    const newMsg: Message = {
-                      id: Date.now().toString(),
-                      sender: newRecipient,
-                      preview: newMessageText,
-                    }
-                    setMessages((prev) => [newMsg, ...prev])
-                    setShowModal(false)
-                    setNewRecipient('')
-                    setNewMessageText('')
-                  }
-                }}>
-                <Text style={{ color: 'blue' }}>Send</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -234,4 +238,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  contactRow: {
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+  },
+  contactName: {
+    fontSize: 18,
+  },
+
 })
