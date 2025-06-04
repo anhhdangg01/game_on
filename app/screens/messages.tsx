@@ -3,25 +3,41 @@
 import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Modal, TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Message, messagesData } from '../../script/messageData'
 
 export default function Messages() {
   const router = useRouter()
   const navigation = useNavigation()
   const [input, setInput] = useState('')
+  const [messages, setMessages] = useState<Message[]>([])
+
+  useEffect(() => {
+    setMessages([...messagesData])
+  }, [messagesData])
+
+  const filteredMessages = messages.filter((msg) => {
+    const query = input.trim().toLowerCase()
+    if (query === '') return true
+
+    return (
+      msg.sender.toLowerCase().includes(query) ||
+      msg.preview.toLowerCase().includes(query)
+    )
+  })
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-        {/*<TouchableOpacity onPress={() => router.push('/signup')}>*/}
+        <TouchableOpacity
+          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
           <Ionicons name="menu" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Messages</Text>
-       <TouchableOpacity onPress={() => router.push('/nothing')}>
-         <Ionicons name="add" size={28} color="#fff" />
-       </TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push('/nothing')}>
+          <Ionicons name="add" size={28} color="#fff" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.field}>
@@ -31,128 +47,42 @@ export default function Messages() {
               style={styles.searchIcon}
               name="search"
               size={20}
-              color="#787878"
-            />
+              color="#787878"/>
             <TextInput
               style={styles.input}
               onChangeText={setInput}
+              value={input}
               placeholder="Search"
               placeholderTextColor="#787878"
             />
           </View>
-          <TouchableOpacity style={styles.filterButton}>
-            <Ionicons
-              name="filter"
-              size={20}
-              color="#787878"
-            />
-          </TouchableOpacity>
         </View>
       </View>
-        
       <ScrollView>
         <View style={styles.field}>
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
-          <View style={styles.post}>
-            <Image 
-              source={require('../../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <View style={styles.textArea}>
-              <Text style={styles.label}>Tennislover123</Text>
-              <Text style={styles.info}>Sup, wanna hang out?</Text>
-            </View>
-          </View>
-
+          {filteredMessages.map((msg) => {
+            const rowContent = (
+              <View style={styles.post} key={msg.id}>
+                <Image
+                  source={require('../../assets/images/profile.png')}
+                  style={styles.profileImage}/>
+                <View style={styles.textArea}>
+                  <Text style={styles.label}>{msg.sender}</Text>
+                  <Text style={styles.info}>{msg.preview}</Text>
+                </View>
+              </View>
+            )
+            if (msg.sender === 'Tennislover123') {
+              return (
+                <TouchableOpacity
+                  key={msg.id}
+                  onPress={() => router.push('/screens/direct_message')}>
+                  {rowContent}
+                </TouchableOpacity>
+              )
+            }
+            return rowContent
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -188,25 +118,25 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 10,
     marginTop: 6,
-    position: 'absolute'
+    position: 'absolute',
   },
   label: {
     fontWeight: 'bold',
-    fontSize: 23
+    fontSize: 23,
   },
   info: {
-    fontSize: 18
-  },
-  location: {
-    fontSize: 15
+    fontSize: 18,
+    marginTop: 4,
   },
   post: {
-    padding: 6,
-    paddingBottom: 15,
-    marginBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
   },
   textArea: {
-    marginLeft: 100
+    marginLeft: 100,
   },
   searchSection: {
     flexDirection: 'row',
@@ -220,12 +150,6 @@ const styles = StyleSheet.create({
   searchIcon: {
     position: 'absolute',
     left: 12,
-  },
-  filterIcon: {
-    position: 'absolute',
-    paddingTop: 8,
-    paddingRight: 3,
-    marginLeft: '93%'
   },
   input: {
     backgroundColor: '#eee',
@@ -242,16 +166,5 @@ const styles = StyleSheet.create({
     padding: 8,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#2ecc71',
-    paddingVertical: 16,
-    alignItems: 'center',
-    marginBottom: 12,
-    marginHorizontal: 120,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
   },
 })
