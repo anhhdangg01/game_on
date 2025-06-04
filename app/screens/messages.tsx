@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { TouchableWithoutFeedback, Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Message, messagesData } from '../../script/messageData'
 
 const allContacts = Array.from(
@@ -100,7 +100,9 @@ export default function Messages() {
         </View>
       </ScrollView>
       <Modal visible={showModal} animationType="slide" transparent>
+        <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
         <View style={styles.modalOverlay}>
+            <TouchableWithoutFeedback>
           <View style={styles.modalContainer}>
             <TextInput
               placeholder="Search contacts"
@@ -132,7 +134,9 @@ export default function Messages() {
               </TouchableOpacity>
             </View>
           </View>
+        </TouchableWithoutFeedback>
         </View>
+        </TouchableWithoutFeedback>
       </Modal>
     </SafeAreaView>
   )

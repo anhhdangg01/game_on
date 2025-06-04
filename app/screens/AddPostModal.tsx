@@ -1,7 +1,7 @@
 // app/screens/AddPostModal.tsx
 
 import React, { useState } from 'react'
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, } from 'react-native'
+import { TouchableWithoutFeedback, Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, } from 'react-native'
 import { ForumPost, addPost } from '../../script/forumData'
 
 interface Props {
@@ -38,7 +38,9 @@ export default function AddPostModal({ visible, onClose }: Props) {
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
+      <TouchableWithoutFeedback onPress={onClose}>
       <View style={styles.backdrop}>
+        <TouchableWithoutFeedback>
         <View style={styles.modalContainer}>
           <Text style={styles.heading}>New Forum Post</Text>
 
@@ -88,7 +90,9 @@ export default function AddPostModal({ visible, onClose }: Props) {
             </TouchableOpacity>
           </View>
         </View>
+      </TouchableWithoutFeedback>
       </View>
+      </TouchableWithoutFeedback>
     </Modal>
   )
 }
