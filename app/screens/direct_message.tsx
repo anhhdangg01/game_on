@@ -10,7 +10,7 @@ export default function directMessage() {
   const router = useRouter()
   const navigation = useNavigation()
   const [input, setInput] = useState('')
-  const messages = [
+  let messages = [
     {
       user: "Tennislover123",
       image: null,
@@ -18,13 +18,13 @@ export default function directMessage() {
       date: new Date(2025, 3, 22, 20, 0, 0),
       message: "I'm gonna head home for now. See you later!"
     },
-    {
-      user: "self",
-      image: null,
-      reaction: null,
-      date: new Date(2025, 3, 22, 20, 3, 0),
-      message: "see you soon!"
-    },
+    // {
+    //   user: "self",
+    //   image: null,
+    //   reaction: null,
+    //   date: new Date(2025, 3, 22, 20, 3, 0),
+    //   message: "see you soon!"
+    // },
     {
       user: "Tennislover123",
       image: null,
@@ -39,28 +39,39 @@ export default function directMessage() {
       date: new Date(2025, 3, 23, 18, 34, 10),
       message: "Thanks so much for letting me play with yall today!"
     },
-    {
-      user: "self",
-      image: null,
-      reaction: null,
-      date: new Date(2025, 3, 23, 18, 35, 0),
-      message: "np thanks for joining"!
-    },
+    // {
+    //   user: "self",
+    //   image: null,
+    //   reaction: null,
+    //   date: new Date(2025, 3, 23, 18, 35, 0),
+    //   message: "np thanks for joining"!
+    // },
     {
       user: "Tennislover123",
-      image: "",
+      image: null,
       reaction: null,
       date: new Date(2025, 6, 5, 16, 30, 0),
       message: "hey! I saw your post just now and was wondering if I can join yall?",
     },
-    {
-      user: "self",
-      image: null,
-      reaction: "heart",
-      date: new Date(2025, 6, 5, 16, 34, 0),
-      message: "For sure!"
-    }
+    // {
+    //   user: "self",
+    //   image: null,
+    //   reaction: "heart",
+    //   date: new Date(2025, 6, 5, 16, 34, 0),
+    //   message: "For sure!"
+    // }
   ]
+
+  // const loadMessages = (text) => {
+  //   let texts = ""
+  //   if (text.user == "self") {
+  //     return "<View style={styles.userMessage}>" + text.message + "</View>"
+  //   }
+  //   return "<View style={styles.otherMessage}>" + text.message + "</View>"
+  // }
+
+  // const handleMessage = () => {
+  // }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -81,12 +92,33 @@ export default function directMessage() {
 
       <ScrollView>
         <View style={styles.field}>
+          {/* <View style={styles.otherMessage}>
+            
+          </View> */}
+          {messages.map((msg) => (
+            <TextInput
+              style={styles.otherMessage} 
+              placeholder={msg.message}
+              editable={false}
+            />
+          ))}
+          
+          {/* <TextInput
+            style={styles.userMessage}
+            placeholder={input}
+            editable={false}
+          /> */}
+          {input != "" && <TextInput 
+            style={styles.userMessage}
+            value={input}
+            editable={false}
+          />}
 
         </View>
       </ScrollView>
 
       <View style={styles.field}>
-        <View style={styles.searchSection}>
+        <View style={styles.inputSection}>
           <View style={styles.inputWrapper}>
             <Ionicons
               style={styles.cameraIcon}
@@ -97,6 +129,7 @@ export default function directMessage() {
             <TextInput
               style={styles.input}
               onChangeText={setInput}
+              // onSubmitEditing={handleMessage}
               placeholder="Message..."
               placeholderTextColor="#787878"
             />
@@ -147,9 +180,6 @@ const styles = StyleSheet.create({
     marginTop: 6,
     position: 'absolute'
   },
-  message: {
-
-  },
   input: {
     backgroundColor: '#eee',
     height: 40,
@@ -158,7 +188,7 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     fontSize: 16,
   },
-  searchSection: {
+  inputSection: {
     flexDirection: 'row',
     alignItems:'center'
   },
@@ -178,5 +208,28 @@ const styles = StyleSheet.create({
   imageIcon: {
     position: 'absolute',
     marginLeft: "93%"
+  },
+  userMessage: {
+    borderRadius: 20,
+    backgroundColor: "#535CFF",
+    height: 40,
+    fontSize: 16,
+    color: "#fff",
+    marginVertical: 5,
+    width: "80%",
+    marginLeft: "20%",
+    paddingLeft: "2%"
+  },
+  otherMessage: {
+    borderRadius: 20,
+    borderWidth: 3,
+    borderColor: "#eee",
+    backgroundColor: "#fff",
+    height: 40,
+    fontSize: 16,
+    color: "#000",
+    marginVertical: 5,
+    width: "80%",
+    paddingLeft: "2%"
   }
 })
