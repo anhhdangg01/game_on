@@ -1,4 +1,4 @@
-// app/screens/profile.tsx
+// app/screens/otherProfile.tsx
 
 import React, { useState } from 'react'
 import { SafeAreaView, Image, View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'

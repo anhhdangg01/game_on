@@ -1,4 +1,4 @@
-// app/screens/forum.tsx
+// app/screens/yourPosts.tsx
 
 import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation , useFocusEffect } from '@react-navigation/native'
@@ -77,7 +77,10 @@ export default function YourPosts() {
       </View>
 
       <ScrollView contentContainerStyle={styles.list}>
-        {yourPosts.map((post) => (
+        {yourPosts.length === 0 ? (
+          <Text style={styles.emptyText}>You haven't created any posts yet.</Text>
+        ) : (
+        yourPosts.map((post) => (
           <View key={post.id} style={styles.card}>
             {editingId === post.id ? (
               <>
@@ -138,6 +141,7 @@ export default function YourPosts() {
               </>
             )}
           </View>
+          )
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -215,5 +219,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
   },
-
+  emptyText: {
+    fontSize: 16,
+    color: '#777',
+    textAlign: 'center',
+    marginTop: 40,
+  },
 })
