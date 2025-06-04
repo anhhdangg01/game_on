@@ -7,7 +7,8 @@ import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function otherProfile() {
-      const navigation = useNavigation()
+  const navigation = useNavigation()
+  const router = useRouter()
 
     const onSubmit = () => {
       router.replace('/screens/forum')
@@ -16,8 +17,8 @@ export default function otherProfile() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
-          <Ionicons name="menu" size={28} color="#fff" />
+        <TouchableOpacity onPress={() => router.push('/screens/forum')}>
+          <Ionicons name="arrow-back" size={28} color="#fff"/>
         </TouchableOpacity>
         <View style={{ width: 28 }} />
       </View>
