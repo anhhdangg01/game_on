@@ -40,9 +40,17 @@ export default function otherProfile() {
           <Text style={styles.followLabel}>97 Following</Text>
         </View>
 
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionText}>Follow</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionText}>Follow</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionText}>Add Friend</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Text style={styles.actionText}>Message</Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Favorite Sport(s)</Text>
@@ -111,9 +119,8 @@ const styles = StyleSheet.create({
   actionButton: {
     backgroundColor: '#007BFF',
     paddingVertical: 8,
-    paddingHorizontal: 20,
+    paddingHorizontal: 14,
     borderRadius: 20,
-    marginTop: 12,
   },
   actionText: {
     color: '#fff',
@@ -143,5 +150,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     marginRight: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+    marginTop: 12,
   },
 })
