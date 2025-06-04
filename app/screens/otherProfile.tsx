@@ -48,7 +48,9 @@ export default function otherProfile() {
           <TouchableOpacity style={styles.actionButton}>
             <Text style={styles.actionText}>Add Friend</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() => router.push({ pathname: '/screens/direct_message', params: { user: 'tennislover134' } })}>
             <Text style={styles.actionText}>Message</Text>
           </TouchableOpacity>
         </View>
