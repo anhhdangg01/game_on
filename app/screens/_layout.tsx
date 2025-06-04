@@ -77,6 +77,13 @@ export default function RootLayout() {
         }}
       />
       <Drawer.Screen
+        name="map"
+        options={{
+          title: 'Map',
+          headerShown: false
+        }}
+      />
+      <Drawer.Screen
         name="login"
         options={{
           title: 'Logout',
