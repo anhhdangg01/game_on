@@ -86,15 +86,18 @@ export default function Messages() {
                 </View>
               </View>
             )
-            if (msg.sender === 'Tennislover123') {
-              return (
-                <TouchableOpacity
-                  key={msg.id}
-                  onPress={() => router.push('/screens/direct_message')}>
-                  {rowContent}
-                </TouchableOpacity>
-              )
-            }
+            return (
+              <TouchableOpacity
+                key={msg.id}
+                onPress={() =>
+                  router.push({
+                    pathname: '/screens/direct_message',
+                    params: { user: msg.sender },
+                  })
+                }>
+                {rowContent}
+              </TouchableOpacity>
+            )
             return rowContent
           })}
         </View>
