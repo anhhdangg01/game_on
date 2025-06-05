@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         paddingHorizontal: 16,
         paddingVertical: 12,
-        marginTop: 40,
+        marginTop: 0,
       },
     map: {
       flex: 1,

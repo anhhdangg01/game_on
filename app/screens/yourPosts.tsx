@@ -1,11 +1,10 @@
 // app/screens/yourPosts.tsx
 
 import { Ionicons } from '@expo/vector-icons'
-import { DrawerActions, useNavigation , useFocusEffect } from '@react-navigation/native'
-import { useRouter } from 'expo-router'
-import React, { useState ,useEffect, useCallback } from 'react'
-import { Alert, TextInput, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { forumData, ForumPost, CURRENT_USER_ID, deletePost, updatePost } from '../../script/forumData'
+import { DrawerActions, useFocusEffect, useNavigation } from '@react-navigation/native'
+import React, { useCallback, useState } from 'react'
+import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { CURRENT_USER_ID, deletePost, forumData, ForumPost, updatePost } from '../../script/forumData'
 
 export default function YourPosts() {
   const [yourPosts, setYourPosts] = useState<ForumPost[]>([])
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#000',
-    marginTop: 40,
+    marginTop: 0,
     marginBottom: 10,
     paddingHorizontal: 16,
     paddingVertical: 12,
