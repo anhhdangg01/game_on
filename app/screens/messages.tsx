@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { useRouter } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { TouchableWithoutFeedback, Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import { Message, messagesData } from '../../script/messageData'
 
 const allContacts = Array.from(
@@ -98,7 +98,6 @@ export default function Messages() {
                 {rowContent}
               </TouchableOpacity>
             )
-            return rowContent
           })}
         </View>
       </ScrollView>
@@ -155,7 +154,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#000',
-    marginTop: 40,
+    marginTop: 0,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },

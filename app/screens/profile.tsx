@@ -1,10 +1,10 @@
 // app/screens/profile.tsx
 
-import React, { useState } from 'react'
-import { ScrollView, SafeAreaView, Image, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { useRouter } from 'expo-router'
-import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
+import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
+import React, { useState } from 'react'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 export default function SignUp() {
       const router = useRouter()
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#000',
-    marginTop: 40,
+    marginTop: 0,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },

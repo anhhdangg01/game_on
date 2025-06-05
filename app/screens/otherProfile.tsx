@@ -1,10 +1,10 @@
 // app/screens/otherProfile.tsx
 
-import React, { useState } from 'react'
-import { SafeAreaView, Image, View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
-import { useRouter } from 'expo-router'
-import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
+import React from 'react'
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 export default function otherProfile() {
   const navigation = useNavigation()
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#000',
-    marginTop: 40,
+    marginTop: 0,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
